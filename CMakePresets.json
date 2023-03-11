@@ -1,0 +1,40 @@
+{
+    "version": 3,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 22,
+        "patch": 1
+    },
+    "configurePresets": [
+        {
+            "name": "base",
+            "generator": "Ninja",
+            "hidden": true
+        },
+        {
+            "name": "OPoverload-tests",
+            "inherits": "base",
+            "binaryDir": "${sourceDir}/build/OPoverload-tests",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "test",
+            "configurePreset": "OPoverload-tests",
+            "jobs": 4,
+            "targets": "OPoverload-tests"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "OPoverload-tests",
+            "configurePreset": "OPoverload-tests",
+            "execution": {
+                "jobs": 4
+            }
+        }
+    ]
+}
