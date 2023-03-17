@@ -6,6 +6,9 @@ add_executable(
     ${PROJECT_SOURCE_DIR}/projects/include/OPoverload/time.hpp
 )
 
+include(CompileOptions)
+set_compile_options(${target_name})
+
 target_link_libraries(
     ${target_name}
     PRIVATE

@@ -3,6 +3,8 @@
 
 int main()
 {
+    using namespace timelib::literals;
+
     try
     {
         const std::size_t num1 = 432000;
@@ -13,7 +15,9 @@ int main()
 
         std::cout << time - time_span << '\n';
 
-        if (time < time_span)
+        auto pepe = 500000_d;
+
+        if (time < pepe)
         {
             std::cout << "pepega1\n";
         }
