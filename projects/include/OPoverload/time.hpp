@@ -3,10 +3,22 @@
 
 namespace timelib {
 
+constexpr static std::size_t DAY = 86400;
+constexpr static std::size_t HOUR = 3600;
+constexpr static std::size_t MIN = 60;
+
 class TimeInterface
 {
-   public:
+   private:
     std::size_t time_;
+
+   public:
+    auto time() const
+    {
+        return time_;
+    }
+
+    auto operator<=>(const TimeInterface&) const = default;
 
    protected:
     explicit TimeInterface(std::size_t time) : time_(time)
@@ -32,55 +44,55 @@ class TimeSpan : public TimeInterface
 
 inline TimeSpan operator-(const Time& lhs, const Time& rhs)
 {
-    if (lhs.time_ - rhs.time_ > lhs.time_)
+    if (lhs.time() - rhs.time() > lhs.time())
     {
         throw std::overflow_error{"result time below zero"};
     }
-    return TimeSpan(lhs.time_ - rhs.time_);
+    return TimeSpan(lhs.time() - rhs.time());
 }
 
 inline Time operator+(const Time& lhs, const TimeSpan& rhs)
 {
-    if (lhs.time_ - rhs.time_ < lhs.time_)
+    if (lhs.time() + rhs.time() < lhs.time())
     {
         throw std::overflow_error{"overflow"};
     }
-    return Time(lhs.time_ + rhs.time_);
+    return Time(lhs.time() + rhs.time());
 }
 
 inline Time operator-(const Time& lhs, const TimeSpan& rhs)
 {
-    if (lhs.time_ - rhs.time_ > lhs.time_)
+    if (lhs.time() - rhs.time() > lhs.time())
     {
         throw std::overflow_error{"result time below zero"};
     }
-    return Time(lhs.time_ - rhs.time_);
+    return Time(lhs.time() - rhs.time());
 }
 
 inline TimeSpan operator+(const TimeSpan& lhs, const TimeSpan& rhs)
 {
-    if (lhs.time_ - rhs.time_ < lhs.time_)
+    if (lhs.time() + rhs.time() < lhs.time())
     {
         throw std::overflow_error{"overflow"};
     }
-    return TimeSpan(lhs.time_ + rhs.time_);
+    return TimeSpan(lhs.time() + rhs.time());
 }
 
 inline TimeSpan operator-(const TimeSpan& lhs, const TimeSpan& rhs)
 {
-    if (lhs.time_ - rhs.time_ > lhs.time_)
+    if (lhs.time() - rhs.time() > lhs.time())
     {
         throw std::overflow_error{"result time below zero"};
     }
-    return TimeSpan(lhs.time_ - rhs.time_);
+    return TimeSpan(lhs.time() - rhs.time());
 }
 
 inline std::ostream& operator<<(std::ostream& os, const TimeInterface& val)
 {
-    std::size_t day = val.time_ / (86400);
-    std::size_t hour = (val.time_ - day * 86400) / 3600;
-    std::size_t min = (val.time_ - day * 86400 - hour * 3600) / 60;
-    std::size_t sec = (val.time_ - day * 86400 - hour * 3600 - min * 60);
+    std::size_t day = val.time() / (DAY);
+    std::size_t hour = (val.time() - day * DAY) / HOUR;
+    std::size_t min = (val.time() - day * DAY - hour * HOUR) / MIN;
+    std::size_t sec = (val.time() - day * DAY - hour * HOUR - min * MIN);
     return os << day << "d " << hour << "h " << min << "m " << sec << "s " << '\n';
 }
 
