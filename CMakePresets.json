@@ -18,14 +18,28 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
+        },
+        {
+            "name": "OPoverload",
+            "inherits": "base",
+            "binaryDir": "${sourceDir}/build/OPoverload",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
         }
     ],
     "buildPresets": [
         {
-            "name": "test",
+            "name": "OPoverload-tests",
             "configurePreset": "OPoverload-tests",
             "jobs": 4,
             "targets": "OPoverload-tests"
+        },
+        {
+            "name": "OPoverload",
+            "configurePreset": "OPoverload",
+            "jobs": 4,
+            "targets": "OPoverload"
         }
     ],
     "testPresets": [
