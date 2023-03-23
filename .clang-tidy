@@ -27,7 +27,8 @@ Checks: |
   -llvm-include-order,
   -cppcoreguidelines-pro-type-reinterpret-cast,
   -modernize-use-nullptr,
-  -hicpp-use-nullptr
+  -hicpp-use-nullptr,
+  -abseil-string-find-str-contains
 WarningsAsErrors: true
 HeaderFilterRegex: 'OPoverload/|soundex/'
 AnalyzeTemporaryDtors: false

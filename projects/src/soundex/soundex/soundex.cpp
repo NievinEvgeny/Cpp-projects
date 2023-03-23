@@ -20,7 +20,8 @@ static bool check_name_correctness(std::string_view name)
 static void remove_hw(std::string& hash)
 {
     hash.erase(
-        std::remove_if(hash.begin(), hash.end(), [](const char letter) { return (letter == 'H' || letter == 'W'); }),
+        std::remove_if(
+            hash.begin() + 1, hash.end(), [](const char letter) { return (letter == 'H' || letter == 'W'); }),
         hash.end());
 }
 
@@ -67,6 +68,15 @@ static void unique_nums(std::string& hash)
     hash.erase(std::unique(hash.begin(), hash.end(), comparison_nums), hash.end());
 }
 
+static void remove_vowels(std::string& hash)
+{
+    constexpr std::string_view vowels = "AEIOUY";
+
+    hash.erase(
+        remove_if(hash.begin() + 1, hash.end(), [&](char letter) { return vowels.find(letter) != std::string::npos; }),
+        hash.end());
+}
+
 std::string soundex_hash(std::string_view name)
 {
     if (!check_name_correctness(name))
@@ -82,6 +92,7 @@ std::string soundex_hash(std::string_view name)
     remove_hw(name_hash);
     letters_to_nums(name_hash);
     unique_nums(name_hash);
+    remove_vowels(name_hash);
 
     name_hash.at(0) = first_letter;
     return name_hash;
