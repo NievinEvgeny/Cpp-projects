@@ -15,7 +15,7 @@ int main()
 
         std::cout << time - time_span << '\n';
 
-        auto pepe = 500000_d;
+        const auto pepe = 500000_d;
 
         if (time < pepe)
         {
