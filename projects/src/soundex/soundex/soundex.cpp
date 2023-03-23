@@ -14,13 +14,13 @@ static void str_toupper(std::string& s)
 
 static bool check_name_correctness(std::string_view name)
 {
-    return std::all_of(name.begin(), name.end(), [&](const char symbol) { return std::isalpha(symbol); });
+    return std::all_of(name.begin(), name.end(), [](const unsigned char symbol) { return std::isalpha(symbol); });
 }
 
 static void remove_hw(std::string& hash)
 {
     hash.erase(
-        std::remove_if(hash.begin(), hash.end(), [&](const char letter) { return (letter == 'h' || letter == 'w'); }),
+        std::remove_if(hash.begin(), hash.end(), [](const char letter) { return (letter == 'H' || letter == 'W'); }),
         hash.end());
 }
 
@@ -57,6 +57,16 @@ static void letters_to_nums(std::string& hash)
     std::for_each(hash.begin(), hash.end(), convert_letter);
 }
 
+static bool comparison_nums(char num1, char num2)
+{
+    return isdigit(num1) ? num1 == num2 : false;
+}
+
+static void unique_nums(std::string& hash)
+{
+    hash.erase(std::unique(hash.begin(), hash.end(), comparison_nums), hash.end());
+}
+
 std::string soundex_hash(std::string_view name)
 {
     if (!check_name_correctness(name))
@@ -64,15 +74,17 @@ std::string soundex_hash(std::string_view name)
         throw std::runtime_error{"Name contains unexpected symbols"};
     }
 
-    const char first_letter = name.front();
-
     std::string name_hash{name};
     str_toupper(name_hash);
 
+    const char first_letter = name_hash.front();
+
     remove_hw(name_hash);
     letters_to_nums(name_hash);
+    unique_nums(name_hash);
 
-    return name_hash + first_letter;
+    name_hash.at(0) = first_letter;
+    return name_hash;
 }
 
 }  // namespace soundex
