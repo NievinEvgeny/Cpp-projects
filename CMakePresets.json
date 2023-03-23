@@ -26,6 +26,14 @@
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
+        },
+        {
+            "name": "soundex",
+            "inherits": "base",
+            "binaryDir": "${sourceDir}/build/soundex",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE": "Release"
+            }
         }
     ],
     "buildPresets": [
@@ -40,6 +48,12 @@
             "configurePreset": "OPoverload",
             "jobs": 4,
             "targets": "OPoverload"
+        },
+        {
+            "name": "soundex",
+            "configurePreset": "soundex",
+            "jobs": 4,
+            "targets": "soundex"
         }
     ],
     "testPresets": [

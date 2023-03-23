@@ -29,7 +29,7 @@ Checks: |
   -modernize-use-nullptr,
   -hicpp-use-nullptr
 WarningsAsErrors: true
-HeaderFilterRegex: 'OPoverload/'
+HeaderFilterRegex: 'OPoverload/|soundex/'
 AnalyzeTemporaryDtors: false
 FormatStyle:     file
 CheckOptions:
