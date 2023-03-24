@@ -27,6 +27,10 @@ void SoundexMapBuilder::parse_csv(const std::string& filename)
     std::for_each(names.begin(), names.end(), [this](const std::string& name) {
         return hash_to_names[soundex::soundex_hash(name)].push_back(name);
     });
+
+    std::for_each(hash_to_names.begin(), hash_to_names.end(), [](auto& pair) {
+        return std::sort(pair.second.begin(), pair.second.end());
+    });
 }
 
 }  // namespace soundex
