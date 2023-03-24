@@ -12,9 +12,9 @@
             "hidden": true
         },
         {
-            "name": "OPoverload-tests",
+            "name": "tests",
             "inherits": "base",
-            "binaryDir": "${sourceDir}/build/OPoverload-tests",
+            "binaryDir": "${sourceDir}/build/tests",
             "cacheVariables": {
                 "CMAKE_BUILD_TYPE": "Release"
             }
@@ -38,10 +38,10 @@
     ],
     "buildPresets": [
         {
-            "name": "OPoverload-tests",
-            "configurePreset": "OPoverload-tests",
+            "name": "tests",
+            "configurePreset": "tests",
             "jobs": 4,
-            "targets": "OPoverload-tests"
+            "targets": "tests"
         },
         {
             "name": "OPoverload",
@@ -58,8 +58,8 @@
     ],
     "testPresets": [
         {
-            "name": "OPoverload-tests",
-            "configurePreset": "OPoverload-tests",
+            "name": "tests",
+            "configurePreset": "tests",
             "execution": {
                 "jobs": 4
             }

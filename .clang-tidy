@@ -28,7 +28,8 @@ Checks: |
   -cppcoreguidelines-pro-type-reinterpret-cast,
   -modernize-use-nullptr,
   -hicpp-use-nullptr,
-  -abseil-string-find-str-contains
+  -abseil-string-find-str-contains,
+  -google-readability-avoid-underscore-in-googletest-name
 WarningsAsErrors: true
 HeaderFilterRegex: 'OPoverload/|soundex/'
 AnalyzeTemporaryDtors: false
