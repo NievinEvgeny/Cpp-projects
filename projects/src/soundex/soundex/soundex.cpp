@@ -94,7 +94,11 @@ std::string soundex_hash(std::string_view name)
     unique_nums(name_hash);
     remove_vowels(name_hash);
 
+    constexpr short hash_length = 4;
+    name_hash.resize(hash_length, '0');
+
     name_hash.at(0) = first_letter;
+
     return name_hash;
 }
 
