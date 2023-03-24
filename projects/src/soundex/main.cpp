@@ -4,21 +4,14 @@
 #include <iostream>
 #include <stdexcept>
 
-#include <nlohmann/json.hpp>
-#include <fstream>
-
 int main()
 {
     try
     {
         const std::string filename = "names.csv";
+        const std::string file_to_write = "json_names.csv";
         soundex::SoundexMapBuilder soundex_map(filename);
-
-        nlohmann::json j = soundex_map.get_map();
-        std::ofstream file;
-        file.open("json_names.csv");
-        file << std::setw(4) << j;
-        file.close();
+        soundex_map.serialize_map(file_to_write);
     }
     catch (const std::exception& msg)
     {

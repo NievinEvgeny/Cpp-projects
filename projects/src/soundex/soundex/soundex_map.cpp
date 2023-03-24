@@ -1,11 +1,13 @@
 #include <soundex/soundex_map.hpp>
 #include <soundex/soundex.hpp>
 #include <rapidcsv.h>
+#include <nlohmann/json.hpp>
 #include <filesystem>
 #include <stdexcept>
 #include <vector>
 #include <algorithm>
 #include <string>
+#include <fstream>
 
 namespace soundex {
 
@@ -31,6 +33,15 @@ void SoundexMapBuilder::parse_csv(const std::string& filename)
     std::for_each(hash_to_names.begin(), hash_to_names.end(), [](auto& pair) {
         return std::sort(pair.second.begin(), pair.second.end());
     });
+}
+
+void SoundexMapBuilder::serialize_map(const std::string& path_to_write)
+{
+    nlohmann::json j = hash_to_names;
+    std::ofstream file;
+    file.open(path_to_write);
+    file << std::setw(4) << j;
+    file.close();
 }
 
 }  // namespace soundex

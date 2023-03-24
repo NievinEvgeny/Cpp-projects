@@ -17,12 +17,12 @@ class SoundexMapBuilder
         parse_csv(filename);
     }
 
+    void serialize_map(const std::string& path_to_write);
+
     const std::map<std::string, std::vector<std::string>>& get_map()
     {
         return hash_to_names;
     }
-
-    // TODO(slip) write
 };
 
 }  // namespace soundex

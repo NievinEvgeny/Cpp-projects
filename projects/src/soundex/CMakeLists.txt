@@ -15,7 +15,6 @@ target_link_libraries(
     ${target_name}
     PRIVATE
     libsoundex
-    nlohmann_json::nlohmann_json
 )
 
 add_subdirectory(soundex)
