@@ -16,7 +16,7 @@ int main()
 
         nlohmann::json j = soundex_map.get_map();
         std::ofstream file;
-        file.open("names.csv");
+        file.open("json_names.csv");
         file << std::setw(4) << j;
         file.close();
     }
