@@ -1,11 +1,10 @@
-set(target_name tests)
+set(target_name libsoundex)
 
-add_executable(
-    ${target_name}
-    time.cpp
-    ${PROJECT_SOURCE_DIR}/projects/include/OPoverload/time.hpp
+add_library(${target_name} STATIC
     soundex.cpp
     ${PROJECT_SOURCE_DIR}/projects/include/soundex/soundex.hpp
+    soundex_map.cpp
+    ${PROJECT_SOURCE_DIR}/projects/include/soundex/soundex_map.hpp
 )
 
 include(CompileOptions)
@@ -14,8 +13,8 @@ set_compile_options(${target_name})
 target_link_libraries(
     ${target_name}
     PRIVATE
-    libsoundex
-    GTest::gtest_main
+    rapidcsv
+    nlohmann_json::nlohmann_json
 )
 
 target_include_directories(
@@ -23,6 +22,3 @@ target_include_directories(
     PUBLIC
     ${PROJECT_SOURCE_DIR}/projects/include/
 )
-
-include(GoogleTest)
-gtest_discover_tests(${target_name})

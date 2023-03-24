@@ -27,9 +27,11 @@ Checks: |
   -llvm-include-order,
   -cppcoreguidelines-pro-type-reinterpret-cast,
   -modernize-use-nullptr,
-  -hicpp-use-nullptr
+  -hicpp-use-nullptr,
+  -abseil-string-find-str-contains,
+  -google-readability-avoid-underscore-in-googletest-name
 WarningsAsErrors: true
-HeaderFilterRegex: 'OPoverload/'
+HeaderFilterRegex: 'OPoverload/|soundex/'
 AnalyzeTemporaryDtors: false
 FormatStyle:     file
 CheckOptions:
