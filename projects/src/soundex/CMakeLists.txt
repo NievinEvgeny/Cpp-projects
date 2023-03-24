@@ -15,6 +15,7 @@ target_link_libraries(
     ${target_name}
     PRIVATE
     libsoundex
+    cxxopts
 )
 
 add_subdirectory(soundex)
