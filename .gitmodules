@@ -1,3 +1,9 @@
 [submodule "external/googletest"]
 	path = external/googletest
 	url = https://github.com/google/googletest
+[submodule "external/rapidcsv"]
+	path = external/rapidcsv
+	url = https://github.com/d99kris/rapidcsv
+[submodule "external/json"]
+	path = external/json
+	url = https://github.com/nlohmann/json

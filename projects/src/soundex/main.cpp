@@ -1,15 +1,24 @@
 #include <soundex/soundex.hpp>
+#include <soundex/soundex_map.hpp>
 #include <string>
 #include <iostream>
 #include <stdexcept>
+
+#include <nlohmann/json.hpp>
+#include <fstream>
 
 int main()
 {
     try
     {
-        std::string name_hash = soundex::soundex_hash("mmonium");
+        const std::string filename = "names.csv";
+        soundex::SoundexMapBuilder soundex_map(filename);
 
-        std::cout << name_hash << '\n';
+        nlohmann::json j = soundex_map.get_map();
+        std::ofstream file;
+        file.open("names.csv");
+        file << std::setw(4) << j;
+        file.close();
     }
     catch (const std::exception& msg)
     {
