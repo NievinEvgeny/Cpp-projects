@@ -71,15 +71,15 @@ class shared_ptr
         return *this;
     }
 
-    shared_ptr(shared_ptr&& copy) noexcept : ptr(copy.ptr), count(copy.count)
+    shared_ptr(shared_ptr&& move) noexcept : ptr(move.ptr), count(move.count)
     {
-        copy.ptr = nullptr;
-        copy.count = new std::size_t(1);
+        move.ptr = nullptr;
+        move.count = new std::size_t(1);
     }
 
-    shared_ptr& operator=(shared_ptr&& copy) noexcept
+    shared_ptr& operator=(shared_ptr&& move) noexcept
     {
-        shared_ptr(std::move(copy)).swap(*this);
+        shared_ptr(std::move(move)).swap(*this);
         return *this;
     }
 };
