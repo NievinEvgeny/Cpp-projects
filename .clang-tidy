@@ -31,7 +31,7 @@ Checks: |
   -abseil-string-find-str-contains,
   -google-readability-avoid-underscore-in-googletest-name
 WarningsAsErrors: true
-HeaderFilterRegex: 'OPoverload/|soundex/'
+HeaderFilterRegex: 'OPoverload/|soundex/|smartptr/'
 AnalyzeTemporaryDtors: false
 FormatStyle:     file
 CheckOptions:
