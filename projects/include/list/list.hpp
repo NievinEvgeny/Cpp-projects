@@ -90,12 +90,6 @@ class List
         return size;
     }
 
-    void pop_front()
-    {
-        head = head->get_next();
-        --size;
-    }
-
     void push_front(T data)
     {
         std::shared_ptr<Node<T>> new_node = std::make_shared<Node<T>>(data, head);
@@ -124,6 +118,85 @@ class List
 
         tail = new_node;
         size++;
+    }
+
+    void pop_front()
+    {
+        head = head->get_next();
+        --size;
+    }
+
+    class Iterator
+    {
+        std::shared_ptr<Node<T>> node;
+        std::size_t step = 1;
+
+       public:
+        using iterator_category = std::forward_iterator_tag;
+        using value_type = T;
+        using difference_type = std::ptrdiff_t;
+        using pointer = T*;
+        using reference = T&;
+
+        explicit Iterator() : node(nullptr)
+        {
+        }
+
+        explicit Iterator(std::shared_ptr<Node<T>> new_node, std::size_t new_step = 1)
+            : node(std::move(new_node)), step(new_step)
+        {
+        }
+
+        bool operator==(const Iterator& other) const noexcept
+        {
+            return node == other.node;
+        }
+
+        bool operator!=(const Iterator& other) const noexcept
+        {
+            return !(node == other.node);
+        }
+
+        Iterator& operator++() noexcept
+        {
+            for (std::size_t iter = 0; iter < step; iter++)
+            {
+                if (this->node != nullptr)
+                {
+                    this->node = this->node->get_next();
+                    continue;
+                }
+                break;
+            }
+            return *this;
+        }
+
+        Iterator operator++(int) noexcept
+        {
+            auto old = *this;
+            operator++();
+            return old;
+        }
+
+        T operator*() const noexcept
+        {
+            return node->get_data();
+        }
+
+        T* operator->() const noexcept
+        {
+            return node->get_data();
+        }
+    };
+
+    Iterator begin()
+    {
+        return Iterator(head);
+    }
+
+    Iterator end()
+    {
+        return Iterator(nullptr);
     }
 };
 
