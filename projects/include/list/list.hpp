@@ -126,6 +126,48 @@ class List
         --size;
     }
 
+    void create_cycle(std::size_t elem_index)
+    {
+        if (elem_index <= size - 2)
+        {
+            std::shared_ptr<Node<T>> curr = head;
+
+            for (std::size_t index = 0; index < elem_index; index++)
+            {
+                curr = curr->get_next();
+            }
+
+            tail->set_next(curr);
+        }
+    }
+
+    void delete_cycle()
+    {
+        if (head)
+        {
+            tail->set_next(nullptr);
+        }
+    }
+
+    bool cycle_search()
+    {
+        Iterator turtle_iter(head, 1);
+        Iterator bunny_iter(head, 2);
+
+        for (std::size_t index = 0; index < size; index++)
+        {
+            ++turtle_iter;
+            ++bunny_iter;
+
+            if ((turtle_iter == bunny_iter) && (turtle_iter != end()) && (bunny_iter != end()))
+            {
+                return true;
+            }
+        }
+
+        return !(turtle_iter == end() && (bunny_iter == end()));
+    }
+
     class Iterator
     {
         std::shared_ptr<Node<T>> node;

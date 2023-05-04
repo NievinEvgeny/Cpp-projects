@@ -33,4 +33,19 @@ int main()
     {
         std::cout << *it << '\n';
     }
+
+    if (test4.cycle_search())
+    {
+        std::cout << "error\n";
+    }
+
+    constexpr std::size_t elem_index = 3;
+    test4.create_cycle(elem_index);
+
+    if (test4.cycle_search())
+    {
+        std::cout << "found cycle\n";
+    }
+
+    test4.delete_cycle();
 }
