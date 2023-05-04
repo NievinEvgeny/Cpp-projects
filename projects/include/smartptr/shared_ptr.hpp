@@ -1,6 +1,7 @@
 #pragma once
 #include <utility>
 #include <cstddef>
+#include <new>
 
 namespace smart_ptr {
 
@@ -71,16 +72,9 @@ class shared_ptr
         return *this;
     }
 
-    shared_ptr(shared_ptr&& move) noexcept : ptr(move.ptr), count(move.count)
+    shared_ptr(shared_ptr&& move) noexcept
+        : ptr(std::exchange(move.ptr, nullptr)), count(std::exchange(move.count, new(std::nothrow) std::size_t(1)))
     {
-        move.ptr = nullptr;
-        move.count = new std::size_t(1);
-    }
-
-    shared_ptr& operator=(shared_ptr&& move) noexcept
-    {
-        shared_ptr(std::move(move)).swap(*this);
-        return *this;
     }
 };
 

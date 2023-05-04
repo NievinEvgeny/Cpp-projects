@@ -45,7 +45,7 @@ TEST(shared_ptr, copy_assignment)
     auto* str_ptr = new std::string("this is a string");
     smart_ptr::shared_ptr<std::string> s_ptr(str_ptr);
     ASSERT_EQ(s_ptr.use_count(), 1);
-    smart_ptr::shared_ptr<std::string> s_ptr2 = s_ptr;
+    smart_ptr::shared_ptr<std::string>& s_ptr2 = s_ptr;
     ASSERT_EQ(*s_ptr2, *str_ptr);
     ASSERT_EQ(s_ptr2.use_count(), 2);
 }
@@ -55,7 +55,7 @@ TEST(shared_ptr, copy_constructor)
     auto* str_ptr = new std::string("this is a string");
     smart_ptr::shared_ptr<std::string> s_ptr(str_ptr);
     ASSERT_EQ(s_ptr.use_count(), 1);
-    smart_ptr::shared_ptr<std::string> s_ptr2(s_ptr);
+    smart_ptr::shared_ptr<std::string>& s_ptr2(s_ptr);
     ASSERT_EQ(*s_ptr2, *str_ptr);
     ASSERT_EQ(s_ptr2.use_count(), 2);
 }
