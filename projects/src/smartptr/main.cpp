@@ -38,7 +38,7 @@ int main()
 
         std::cout << *s_ptr1 << ' ' << s_ptr1.get() << ' ' << s_ptr1.use_count() << "\n\n";
 
-        smart_ptr::shared_ptr<std::string> s_ptr2(s_ptr1);
+        smart_ptr::shared_ptr<std::string>& s_ptr2(s_ptr1);
 
         std::cout << *s_ptr1 << ' ' << s_ptr1.get() << ' ' << s_ptr1.use_count() << '\n';
         std::cout << *s_ptr2 << ' ' << s_ptr2.get() << ' ' << s_ptr2.use_count() << "\n\n";
