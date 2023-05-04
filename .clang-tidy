@@ -29,9 +29,11 @@ Checks: |
   -modernize-use-nullptr,
   -hicpp-use-nullptr,
   -abseil-string-find-str-contains,
-  -google-readability-avoid-underscore-in-googletest-name
+  -google-readability-avoid-underscore-in-googletest-name,
+  -cppcoreguidelines-special-member-functions,
+  -hicpp-special-member-functions
 WarningsAsErrors: true
-HeaderFilterRegex: 'OPoverload/|soundex/|smartptr/'
+HeaderFilterRegex: 'OPoverload/|soundex/|smartptr/|list/'
 AnalyzeTemporaryDtors: false
 FormatStyle:     file
 CheckOptions:
