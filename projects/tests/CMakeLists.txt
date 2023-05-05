@@ -5,10 +5,16 @@ add_executable(
     time.cpp
     soundex.cpp
     smartptr.cpp
+    list.cpp
 )
 
-include(CompileOptions)
-set_compile_options(${target_name})
+set_target_properties(
+    ${target_name}
+    PROPERTIES
+    CXX_STANDARD 20
+    CXX_STANDARD_REQUIRED ON
+    CXX_EXTENSIONS OFF
+)
 
 target_link_libraries(
     ${target_name}
