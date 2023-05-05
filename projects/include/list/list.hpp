@@ -128,7 +128,7 @@ class List
 
     void create_cycle(std::size_t elem_index)
     {
-        if (elem_index <= size - 2)
+        if ((size >= 2) && (elem_index <= size - 2))
         {
             std::shared_ptr<Node<T>> curr = head;
 
